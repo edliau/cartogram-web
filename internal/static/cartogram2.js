@@ -3691,6 +3691,15 @@ class Cartogram {
     }
 
     /**
+     * getConfig returns an HTTP get request for the configuration information of a map.
+     * @param {string} sysname The sysname of the map
+     * @returns {Promise}
+     */
+     getCitation(sysname) {
+        return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/citation.json");
+    }
+
+    /**
      * switchMap loads a new map with the given sysname, and displays the conventional and population versions, as well
      * as an optional extra cartogram.
      * @param {string} sysname The sysname of the new map to load

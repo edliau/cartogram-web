@@ -3691,12 +3691,29 @@ class Cartogram {
     }
 
     /**
-     * getConfig returns an HTTP get request for the configuration information of a map.
+     * getCitation returns an HTTP get request for the citations of a map.
      * @param {string} sysname The sysname of the map
      * @returns {Promise}
      */
      getCitation(sysname) {
         return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/citation.json");
+    }
+    
+    /**
+     * generateCitation generates the citation in text form for the given cartogram
+     * @param {string} mode The embedding mode ('map' for embedding the map
+     *                      with no user data, and 'cart' for embedding a map
+     *                      with user data
+     * @param {string} key The embed key
+     */
+     generateCitation(mode, key) {
+        var citation = this.getCitation(sysname)
+        
+        document.getElementById('share-embed-code').innerHTML = embeded_html;
+
+        document.getElementById('share-embed').style.display = 'block';
+        
+        addClipboard('clipboard-embed', embeded_html);
     }
 
     /**

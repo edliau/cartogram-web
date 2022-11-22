@@ -3696,7 +3696,7 @@ class Cartogram {
      * @returns {Promise}
      */
      getCitation(sysname) {
-        return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/citation.json");
+        return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/documentation.json");
     }
     
     /**
@@ -3707,11 +3707,11 @@ class Cartogram {
      * @param {string} key The embed key
      */
      generateCitation(mode, key) {
-        var citation = this.getCitation(sysname)
+        var citation = JSON.parse(this.getCitation(sysname))
         
-        document.getElementById('share-embed-code').innerHTML = embeded_html;
+        document.getElementById('citation-content').innerHTML = citation;
 
-        document.getElementById('share-embed').style.display = 'block';
+        document.getElementById('metadata-info').style.display = 'block';
         
         addClipboard('clipboard-embed', embeded_html);
     }

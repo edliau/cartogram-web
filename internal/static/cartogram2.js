@@ -3698,7 +3698,7 @@ class Cartogram {
      getCitation(sysname) {
         return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/documentation.json");
     }
-    
+
     /**
      * generateCitation generates the citation in text form for the given cartogram
      * @param {string} mode The embedding mode ('map' for embedding the map

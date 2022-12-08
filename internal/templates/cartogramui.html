@@ -486,32 +486,17 @@
             </button>
           </div>
       <div class="modal-body">
-      
-        <div class="mb-3">
-          <h3 class="text-center">Link</h3>
+
+        <div id="metadata-info" class="mb-3">
+	        <h3 class="text-center">Metadata</h3>
+	        <p class="text-center">To cite the source map for this cartogram, copy the citation below:</p>
           <div class="form-group">
-            <input type="text" id="share-link-href" class="form-control w-100" disabled style="font-family: monospace;" value="https://go-cart.io"/>
-            <button style= "margin-top: 4.6px;" data-animation="false" class="clipboard-copy " id="clipboard-link" title="Copy">                
-              <img id="clipboard-link-icon" src="/static/clipboard.svg" alt="Copy button" />
-            </button>
-          </div>
-        </div>
-      
-        
-        <div id="share-embed" class="mb-3" style="display: none">
-          <h3 class="text-center">Embed</h3>
-          <p class="text-center">To embed yor cartogram into any webpage, insert the HTML code below:</p>
-          <div class="form-group">
-            <textarea id="share-embed-code" class="form-control w-100" disabled rows="3" style="font-family: monospace; resize: none"></textarea>
+            <textarea id="citation-content" class="form-control w-100" disabled style="font-family: monospace; resize: none"></textarea>
             <button class="clipboard-copy"  id="clipboard-embed" data-animation="false" title="Copy">
               <img id="clipboard-embed-icon" src="/static/clipboard.svg" alt="Copy button" />
             </button>
           </div>
-        </div>
-
-        <div id="metadata-info" class="mb-3" style="display: none">
-	        <h3 class="text-center">Metadata</h3>
-	        <p class="text-center">To cite the source map for this cartogram, copy the citaion below:</p>
+          <p class="text-center">To cite the data used to generate this cartogram, copy the citation below:</p>
           <div class="form-group">
             <textarea id="citation-content" class="form-control w-100" disabled style="font-family: monospace; resize: none"></textarea>
             <button class="clipboard-copy"  id="clipboard-embed" data-animation="false" title="Copy">

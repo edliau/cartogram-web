@@ -3701,12 +3701,9 @@ class Cartogram {
 
     /**
      * generateCitation generates the citation in text form for the given cartogram
-     * @param {string} mode The embedding mode ('map' for embedding the map
-     *                      with no user data, and 'cart' for embedding a map
-     *                      with user data
-     * @param {string} key The embed key
+     * @param {string} sysname The sysname of the map
      */
-     generateCitation(mode, key) {
+     generateCitation(sysname) {
         var citation = JSON.parse(this.getCitation(sysname))
         
         document.getElementById('citation-content').innerHTML = citation;

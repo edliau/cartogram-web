@@ -3095,6 +3095,30 @@ class Cartogram {
     }
 
     /**
+     * getCitation returns an HTTP get request for the citations of a map.
+     * @param {string} sysname The sysname of the map
+     * @returns {Promise}
+     */
+     getCitation(sysname) {
+        return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/documentation.json");
+    }
+
+    /**
+     * generateCitation generates the citation in text form for the given cartogram
+     * @param {string} sysname The sysname of the map currently being opened
+     * @param {string} key The embed key
+     */
+     generateCitation(sysname,key) {
+        var citation = 'test1' + key  + 'test2' +sysname
+        
+        document.getElementById('citation-content').innerHTML = citation;
+
+        document.getElementById('metadata-info').style.display = 'block';
+        
+        addClipboard('clipboard-citation', citation);
+    }
+
+    /**
      * getGeneratedCartogram generates a cartogram with the given dataset, and updates the progress bar with progress
      * information from the backend.
      * @param {string} sysname The sysname of the map
@@ -3554,6 +3578,7 @@ class Cartogram {
                             this.displayVersionSwitchButtons();
                             this.downloadTemplateFile(sysname);
                             this.displayCustomisePopup(this.model.current_sysname);
+                            this.generateCitation(sysname, response.unique_sharing_key);
 
                             if(update_grid_document) {
                                 this.updateGridDocument(response.grid_document);
@@ -3688,29 +3713,6 @@ class Cartogram {
             this.updateProgressBar(0, 100, Math.floor(e.loaded / e.total * 100));
 
         }.bind(this));
-    }
-
-    /**
-     * getCitation returns an HTTP get request for the citations of a map.
-     * @param {string} sysname The sysname of the map
-     * @returns {Promise}
-     */
-     getCitation(sysname) {
-        return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/documentation.json");
-    }
-
-    /**
-     * generateCitation generates the citation in text form for the given cartogram
-     * @param {string} sysname The sysname of the map
-     */
-     generateCitation(sysname) {
-        var citation = JSON.parse(this.getCitation(sysname))
-        
-        document.getElementById('citation-content').innerHTML = citation;
-
-        document.getElementById('metadata-info').style.display = 'block';
-        
-        addClipboard('clipboard-embed', embeded_html);
     }
 
     /**

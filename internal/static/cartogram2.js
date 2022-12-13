@@ -3108,14 +3108,14 @@ class Cartogram {
      * @param {string} sysname The sysname of the map currently being opened
      * @param {string} key The embed key
      */
-     generateCitation(sysname,key) {
-        var citation = 'test1' + key  + 'test2' +sysname
+    generateCitation(sysname, key) {
+        var citation_html = 'test1' + key + sysname
         
-        document.getElementById('citation-content').innerHTML = citation;
+        document.getElementById('share-citation-content').innerHTML = citation_html;
 
-        document.getElementById('metadata-info').style.display = 'block';
+        document.getElementById('share-citation').style.display = 'block';
         
-        addClipboard('clipboard-citation', citation);
+        addClipboard('clipboard-citation', citation_html);
     }
 
     /**
@@ -3578,7 +3578,7 @@ class Cartogram {
                             this.displayVersionSwitchButtons();
                             this.downloadTemplateFile(sysname);
                             this.displayCustomisePopup(this.model.current_sysname);
-                            this.generateCitation(sysname, response.unique_sharing_key);
+                            this.generateCitation(this.model.current_sysname, response.unique_sharing_key);
 
                             if(update_grid_document) {
                                 this.updateGridDocument(response.grid_document);
@@ -3846,6 +3846,7 @@ class Cartogram {
             this.downloadTemplateFile(sysname);
             this.displayCustomisePopup(this.model.current_sysname);
             this.updateGridDocument(mappack.griddocument);
+            this.generateCitation(this.model.current_sysname, sharing_key);
             
             let selectedLegendTypeMap = document.getElementById("map-area-legend").dataset.legendType;
             let selectedLegendTypeCartogram = document.getElementById("cartogram-area-legend").dataset.legendType;

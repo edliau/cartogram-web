@@ -3125,6 +3125,34 @@ class Cartogram {
     }
 
     /**
+     * generateMapDataCitation generates the citation in text form for the source map of the given cartogram
+     * @param {string} sysname The sysname of the map currently being opened
+     * 
+     */
+     generateMapDataCitation(sysname) {
+        fetch(this.config.cartogram_data_dir + "/" + sysname + "/mapdata_documentation.json")
+            .then(response => response.json())
+            .then(data => {
+                var author_info = ""
+                for (let x=0; x<data.author.length; x++){
+                    if (x == data.author.length-1){
+                        author_info += data.author[x].family + ", " + data.author[x].given + ". ";
+                        break;
+                    }
+                    else if (x == data.author.length-2){
+                        author_info += data.author[x].family + ", " + data.author[x].given + ", and ";
+                    }
+                    else{
+                        author_info += data.author[x].family + ", " + data.author[x].given + ", ";
+                    }
+                }
+                var citation_html = author_info + data.issued["date-parts"] + '. "' + data.title + '." ' + data.volume + ' (' + data.issue + ') ' + data.page + "."
+                document.getElementById('mapdata-citation-content').innerHTML = citation_html
+                document.getElementById('mapdata-citation').style.display = 'block';
+                addClipboard('clipboard-mapdata', citation_html);
+            })        
+    }
+    /**
      * getGeneratedCartogram generates a cartogram with the given dataset, and updates the progress bar with progress
      * information from the backend.
      * @param {string} sysname The sysname of the map
@@ -3584,7 +3612,8 @@ class Cartogram {
                             this.displayVersionSwitchButtons();
                             this.downloadTemplateFile(sysname);
                             this.displayCustomisePopup(this.model.current_sysname);
-                            this.generateSourceMapCitation(this.model.current_sysname, response.unique_sharing_key);
+                            this.generateSourceMapCitation(sysname);
+                            this.generateMapDataCitation(sysname);
 
                             if(update_grid_document) {
                                 this.updateGridDocument(response.grid_document);
@@ -3853,6 +3882,7 @@ class Cartogram {
             this.displayCustomisePopup(this.model.current_sysname);
             this.updateGridDocument(mappack.griddocument);
             this.generateSourceMapCitation(sysname);
+            this.generateMapDataCitation(sysname);
             
             let selectedLegendTypeMap = document.getElementById("map-area-legend").dataset.legendType;
             let selectedLegendTypeCartogram = document.getElementById("cartogram-area-legend").dataset.legendType;

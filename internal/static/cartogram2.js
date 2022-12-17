@@ -3094,28 +3094,33 @@ class Cartogram {
         addClipboard('clipboard-embed', embeded_html);
     }
 
-    /**
-     * getCitation returns an HTTP get request for the citations of a map.
-     * @param {string} sysname The sysname of the map
-     * @returns {Promise}
-     */
-     getCitation(sysname) {
-        return HTTP.get(this.config.cartogram_data_dir + "/" + sysname + "/documentation.json");
-    }
 
     /**
      * generateCitation generates the citation in text form for the given cartogram
      * @param {string} sysname The sysname of the map currently being opened
-     * @param {string} key The embed key
+     * 
      */
-    generateCitation(sysname, key) {
-        var citation_html = 'test1' + key + sysname
-        
-        document.getElementById('share-citation-content').innerHTML = citation_html;
-
-        document.getElementById('share-citation').style.display = 'block';
-        
-        addClipboard('clipboard-citation', citation_html);
+    generateCitation(sysname) {
+        fetch(this.config.cartogram_data_dir + "/" + sysname + "/documentation.json")
+            .then(response => response.json())
+            .then(data => {
+                var author_info = ""
+                for (let x=0; x<data.author.length; x++){
+                    if (x == data.author.length-1){
+                        author_info += data.author[x].family + "," + data.author[x].given + ".";
+                        break;
+                    }
+                    else if (x == data.author.length-2){
+                        author_info += data.author[x].family + "," + data.author[x].given + " & ";
+                    }
+                    else{
+                        author_info += data.author[x].family + "," + data.author[x].given + ", ";
+                    }
+                }
+                document.getElementById('share-citation-content').innerHTML = author_info
+                document.getElementById('share-citation').style.display = 'block';
+                addClipboard('clipboard-citation', author_info);
+            })        
     }
 
     /**
@@ -3846,7 +3851,7 @@ class Cartogram {
             this.downloadTemplateFile(sysname);
             this.displayCustomisePopup(this.model.current_sysname);
             this.updateGridDocument(mappack.griddocument);
-            this.generateCitation(this.model.current_sysname, sharing_key);
+            this.generateCitation(sysname);
             
             let selectedLegendTypeMap = document.getElementById("map-area-legend").dataset.legendType;
             let selectedLegendTypeCartogram = document.getElementById("cartogram-area-legend").dataset.legendType;

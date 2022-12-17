@@ -3096,30 +3096,31 @@ class Cartogram {
 
 
     /**
-     * generateCitation generates the citation in text form for the given cartogram
+     * generateSourceMapCitation generates the citation in text form for the source map of the given cartogram
      * @param {string} sysname The sysname of the map currently being opened
      * 
      */
-    generateCitation(sysname) {
-        fetch(this.config.cartogram_data_dir + "/" + sysname + "/documentation.json")
+    generateSourceMapCitation(sysname) {
+        fetch(this.config.cartogram_data_dir + "/" + sysname + "/sourcemap_documentation.json")
             .then(response => response.json())
             .then(data => {
                 var author_info = ""
                 for (let x=0; x<data.author.length; x++){
                     if (x == data.author.length-1){
-                        author_info += data.author[x].family + "," + data.author[x].given + ".";
+                        author_info += data.author[x].family + ", " + data.author[x].given + ". ";
                         break;
                     }
                     else if (x == data.author.length-2){
-                        author_info += data.author[x].family + "," + data.author[x].given + " & ";
+                        author_info += data.author[x].family + ", " + data.author[x].given + ", and ";
                     }
                     else{
-                        author_info += data.author[x].family + "," + data.author[x].given + ", ";
+                        author_info += data.author[x].family + ", " + data.author[x].given + ", ";
                     }
                 }
-                document.getElementById('share-citation-content').innerHTML = author_info
-                document.getElementById('share-citation').style.display = 'block';
-                addClipboard('clipboard-citation', author_info);
+                var citation_html = author_info + data.issued["date-parts"] + '. "' + data.title + '." ' + data.volume + ' (' + data.issue + ') ' + data.page + "."
+                document.getElementById('sourcemap-citation-content').innerHTML = citation_html
+                document.getElementById('sourcemap-citation').style.display = 'block';
+                addClipboard('clipboard-sourcemap', citation_html);
             })        
     }
 
@@ -3583,7 +3584,7 @@ class Cartogram {
                             this.displayVersionSwitchButtons();
                             this.downloadTemplateFile(sysname);
                             this.displayCustomisePopup(this.model.current_sysname);
-                            this.generateCitation(this.model.current_sysname, response.unique_sharing_key);
+                            this.generateSourceMapCitation(this.model.current_sysname, response.unique_sharing_key);
 
                             if(update_grid_document) {
                                 this.updateGridDocument(response.grid_document);
@@ -3851,7 +3852,7 @@ class Cartogram {
             this.downloadTemplateFile(sysname);
             this.displayCustomisePopup(this.model.current_sysname);
             this.updateGridDocument(mappack.griddocument);
-            this.generateCitation(sysname);
+            this.generateSourceMapCitation(sysname);
             
             let selectedLegendTypeMap = document.getElementById("map-area-legend").dataset.legendType;
             let selectedLegendTypeCartogram = document.getElementById("cartogram-area-legend").dataset.legendType;

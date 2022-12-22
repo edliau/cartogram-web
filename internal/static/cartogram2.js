@@ -3107,14 +3107,14 @@ class Cartogram {
                 var author_info = ""
                 for (let x=0; x<data.author.length; x++){
                     if (x == data.author.length-1){
-                        author_info += data.author[x].family + ", " + data.author[x].given + ". ";
+                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ". ";
                         break;
                     }
                     else if (x == data.author.length-2){
-                        author_info += data.author[x].family + ", " + data.author[x].given + ", and ";
+                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", and ";
                     }
                     else{
-                        author_info += data.author[x].family + ", " + data.author[x].given + ", ";
+                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", ";
                     }
                 }
                 var citation_html = author_info + data.issued["date-parts"] + '. "' + data.title + '." ' + data.volume + ' (' + data.issue + ') ' + data.page + "."
@@ -3136,14 +3136,14 @@ class Cartogram {
                 var author_info = ""
                 for (let x=0; x<data.author.length; x++){
                     if (x == data.author.length-1){
-                        author_info += data.author[x].family + ", " + data.author[x].given + ". ";
+                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ". ";
                         break;
                     }
                     else if (x == data.author.length-2){
-                        author_info += data.author[x].family + ", " + data.author[x].given + ", and ";
+                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", and ";
                     }
                     else{
-                        author_info += data.author[x].family + ", " + data.author[x].given + ", ";
+                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", ";
                     }
                 }
                 var citation_html = author_info + data.issued["date-parts"] + '. "' + data.title + '." ' + data.volume + ' (' + data.issue + ') ' + data.page + "."

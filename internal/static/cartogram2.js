@@ -3107,17 +3107,17 @@ class Cartogram {
                 var author_info = ""
                 for (let x=0; x<data.author.length; x++){
                     if (x == data.author.length-1){
-                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ". ";
+                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ". ";
                         break;
                     }
                     else if (x == data.author.length-2){
-                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", and ";
+                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", and ";
                     }
                     else{
-                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", ";
+                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", ";
                     }
                 }
-                var citation_html = author_info + data.issued["date-parts"] + '. "' + data.title + '." ' + data.volume + ' (' + data.issue + ') ' + data.page + "."
+                var citation_html = author_info + data.title + '. ' + data.publisher + " " + data.volume + '(' + data.issue + '):' + data.page + " " +'(' + data.issued["date-parts"] + ').'
                 document.getElementById('sourcemap-citation-content').innerHTML = citation_html
                 document.getElementById('sourcemap-citation').style.display = 'block';
                 addClipboard('clipboard-sourcemap', citation_html);
@@ -3136,17 +3136,17 @@ class Cartogram {
                 var author_info = ""
                 for (let x=0; x<data.author.length; x++){
                     if (x == data.author.length-1){
-                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ". ";
+                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ". ";
                         break;
                     }
                     else if (x == data.author.length-2){
-                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", and ";
+                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", and ";
                     }
                     else{
-                        author_info += data.author[x].family + ", " + data.author[x].given.charAt(0) + ", ";
+                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", ";
                     }
                 }
-                var citation_html = author_info + data.issued["date-parts"] + '. "' + data.title + '." ' + data.volume + ' (' + data.issue + ') ' + data.page + "."
+                var citation_html = author_info + data.title + '. ' + data.publisher + " " + data.volume + '(' + data.issue + '):' + data.page + " " +'(' + data.issued["date-parts"] + ').'
                 document.getElementById('mapdata-citation-content').innerHTML = citation_html
                 document.getElementById('mapdata-citation').style.display = 'block';
                 addClipboard('clipboard-mapdata', citation_html);

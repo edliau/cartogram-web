@@ -3110,9 +3110,6 @@ class Cartogram {
                         author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ". ";
                         break;
                     }
-                    else if (x == data.author.length-2){
-                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", and ";
-                    }
                     else{
                         author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", ";
                     }
@@ -3138,9 +3135,6 @@ class Cartogram {
                     if (x == data.author.length-1){
                         author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ". ";
                         break;
-                    }
-                    else if (x == data.author.length-2){
-                        author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", and ";
                     }
                     else{
                         author_info += data.author[x].family + " " + data.author[x].given.charAt(0) + ", ";
